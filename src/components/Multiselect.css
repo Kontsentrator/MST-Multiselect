@@ -33,6 +33,11 @@
     color: #002033;
 }
 
+.multiselect option {
+    padding: 100px;
+    border: 1px solid rgba(0, 66, 105, 0.28);
+}
+
 .multiselect option:hover {
     cursor: pointer;
 }
