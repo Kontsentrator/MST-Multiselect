@@ -1,8 +1,8 @@
 import './Multiselect.css';
 
-const massiv = ["Вариант1", "Вариант2", "Треитй вариань"];
+const massiv = ["Вариант 1", "Вариант 2", "Вариант 3"];
 const options = massiv.map((option) => 
-    <option key={option.id}>
+    <option key={option.id} value={option.id}>
         {option}
     </option>
 );
@@ -12,7 +12,7 @@ function Multiselect() {
     <div className="form__item">
       <label htmlFor="multiselect_datasets" className="form__label">Датасеты</label>
 
-      <select id="multiselect datasets" className="multiselect form__input" multiple>
+      <select id="multiselect datasets" className="multiselect form__input" multiple="">
         {options}
       </select>
     </div>
