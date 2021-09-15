@@ -3,7 +3,7 @@ import Multiselect from './components/Multiselect';
 
 function App() {
   return (
-    <form>
+    <form className="form">
       <Multiselect />
     </form>
   );
