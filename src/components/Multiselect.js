@@ -9,9 +9,10 @@ const options = massiv.map((option) =>
 
 function Multiselect() {
   return (
-    <div className="Multiselect">
-      <label htmlFor="multiselect_datasets" className="Form__label">Датасеты</label>
-      <select id="multiselect datasets" className="Form__input">
+    <div className="form__item">
+      <label htmlFor="multiselect_datasets" className="form__label">Датасеты</label>
+
+      <select id="multiselect datasets" className="multiselect form__input" multiple>
         {options}
       </select>
     </div>
