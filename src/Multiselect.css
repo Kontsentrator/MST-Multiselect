@@ -1,4 +1,4 @@
-body, p, a {
+body, p, a, ul, li {
     margin: 0;
     padding: 0;
 }
@@ -31,8 +31,10 @@ li {
 }
 
 .multiselect__selected-items {
-    width: 100%;
+    max-width: 100%;
+    padding: 15px;
     display: flex;
+    align-items: flex-start;
     border: 1px solid rgba(0, 66, 105, 0.28);
     border-radius: 4px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
