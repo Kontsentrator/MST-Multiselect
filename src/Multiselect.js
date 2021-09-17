@@ -46,10 +46,20 @@ function Multiselect() {
     if(e.currentTarget.checked) {
       items.push(massiv.find(el => el.id == id));
     } else {
+      // Найти индекс элемента в массиве, id которого равен нужному
+      id = items.findIndex(i => i == items.find(el => el.id == id));
       items.splice(id, 1); 
     }
     setSelectedMassiv(items);
     console.log(selectedMassiv);
+  }
+
+  function handleDeleteClick(e) {
+    var id = e.currentTarget.value;
+    var items = selectedMassiv;
+    id = items.findIndex(i => i == items.find(el => el.id == id));
+    items.splice(id, 1); 
+    setSelectedMassiv(items);
   }
 
   return (
@@ -60,9 +70,9 @@ function Multiselect() {
         <div className="multiselect__selected-items">
           <ul className="multiselect__selected-items-list">
             {selectedMassiv.map((item) =>
-              <li key={item.id} className="selected-item">
+              <li key={item.id} id={item.id} className="selected-item">
                 <span className="selected-item__text">{item.title}</span>
-                <button className="button-clear"><img src={clear_img} alt="Убрать" /></button>
+                <button className="button-clear" value={item.id} onClick={handleDeleteClick}><img src={clear_img} alt="Убрать" /></button>
               </li>
             )}
           </ul>
