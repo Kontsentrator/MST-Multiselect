@@ -46,9 +46,10 @@ function Multiselect() {
     if(e.currentTarget.checked) {
       items.push(massiv.find(el => el.id == id));
     } else {
-      items.pop(massiv.find(el => el.id == id)); 
+      items.splice(id, 1); 
     }
     setSelectedMassiv(items);
+    console.log(selectedMassiv);
   }
 
   return (
