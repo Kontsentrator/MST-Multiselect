@@ -1,5 +1,6 @@
-import React from 'react';
-import {IItem} from 'interfaces/interfaces';
+import React, { memo } from 'react';
+import { IItem } from 'interfaces/interfaces';
+
 import delete_img from 'img/Clear.svg';
 
 type SelectedListItemProps = {
@@ -16,4 +17,4 @@ const SelectedListItem: React.FC<SelectedListItemProps> = ({item, handleDeleteCl
     );
 }
 
-export default SelectedListItem;
+export default memo(SelectedListItem);
