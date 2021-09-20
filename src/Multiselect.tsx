@@ -40,12 +40,9 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
 
   function handleCheckBoxChange(e: React.FormEvent<HTMLInputElement>, id: number) {   
     if(e.currentTarget.checked) {
-      console.log("Добавление");
-      var item = items.find(el => el.id === id)!;
-      setSelectedItems(prev => [item, ...prev]);
-      console.log(selectedItems);
+      var listItem = items.find(item => item.id === id)!;
+      setSelectedItems(prev => [listItem, ...prev]);
     } else {
-      console.log("Удаление");
       setSelectedItems(prev => prev.filter(item => item.id !== id));
     }
   }
