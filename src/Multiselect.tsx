@@ -1,5 +1,4 @@
 import './Multiselect.css';
-import axios from 'axios';
 import React, {useState, useEffect, useRef} from 'react';
 import {IItem} from './interfaces/interfaces';
 
@@ -8,19 +7,14 @@ import ListItem from './ListItem';
 import clear_img from './img/Clear.svg';
 import triangle_img from './img/Triangle.svg';
 
-const Multiselect: React.FC = () => {
-  const [listIsOpen, setListIsOpen] = useState<boolean>(false);
-  const [massiv, setMassiv] = useState<IItem[]>([]);
-  const [selectedMassiv, setSelectedMassiv] = useState<IItem[]>([]);
-  const wrapRef = useRef<HTMLDivElement>(null);
+type ItemsListProps = {
+  items: IItem[]
+}
 
-  // Получение списка по ссылке
-  useEffect(() => {
-    axios.get("https://api-rguide.admire.social/api/products")
-    .then(function(response) {
-      setMassiv(response.data);
-    })
-  }, [setMassiv]);
+const Multiselect: React.FC<ItemsListProps> = ({items}) => {
+  const [listIsOpen, setListIsOpen] = useState<boolean>(false);
+  const [selectedItems, setSelectedItems] = useState<IItem[]>([]);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
   // Закрытие списка при клике мимо него
   useEffect(() => {
@@ -37,24 +31,27 @@ const Multiselect: React.FC = () => {
   });
 
   function handleСlearClick() {
-    setSelectedMassiv([]);
+    setSelectedItems([]);
   }
 
   function handleOpenCloseListClick() {
     setListIsOpen(prev => {return !prev});
   }
 
-  function handleCheckBoxClick(e: React.FormEvent<HTMLInputElement>, id: number) {   
+  function handleCheckBoxChange(e: React.FormEvent<HTMLInputElement>, id: number) {   
     if(e.currentTarget.checked) {
-      var item = massiv.find(el => el.id === id)!;
-      setSelectedMassiv(prev => [item, ...prev]);
+      console.log("Добавление");
+      var item = items.find(el => el.id === id)!;
+      setSelectedItems(prev => [item, ...prev]);
+      console.log(selectedItems);
     } else {
-      setSelectedMassiv(prev => prev.filter(item => item.id !== id));
+      console.log("Удаление");
+      setSelectedItems(prev => prev.filter(item => item.id !== id));
     }
   }
 
   function handleDeleteClick(id: number) {
-    setSelectedMassiv(prev => prev.filter(item => item.id !== id));
+    setSelectedItems(prev => prev.filter(item => item.id !== id));
   }
 
   return (
@@ -64,7 +61,7 @@ const Multiselect: React.FC = () => {
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
         <div className="multiselect__selected-items">
           <ul className="multiselect__selected-items-list">
-            {selectedMassiv.map((item) =>
+            {selectedItems.map((item) =>
               <li key={item.id} id={item.id.toString()} className="selected-item">
                 <span className="selected-item__text">{item.title}</span>
                 <button className="button-clear" onClick={() => handleDeleteClick(item.id)}><img src={clear_img} alt="Убрать" /></button>
@@ -82,8 +79,8 @@ const Multiselect: React.FC = () => {
         <div className={listIsOpen ? "multiselect__items_active" : "multiselect__items"}>
           <ul className="multiselect__items-list">
             
-            {massiv.map((item) =>
-              <ListItem item={item} checked={selectedMassiv.includes(item)} onChange={(e) => handleCheckBoxClick(e, item.id)} />
+            {items.map((item) =>
+              <ListItem key={item.id} item={item} checked={selectedItems.includes(item)} onChange={(e) => handleCheckBoxChange(e, item.id)} />
             )}
           </ul>
         </div>
