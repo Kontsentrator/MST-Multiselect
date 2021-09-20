@@ -1,5 +1,5 @@
-import React from 'react';
-import {IItem} from 'interfaces/interfaces';
+import React, { memo } from 'react';
+import { IItem } from 'interfaces/interfaces';
 
 type ListItemProps = {
     item: IItem,
@@ -18,4 +18,4 @@ const ListItem: React.FC<ListItemProps> = ({item, checked, onChange}) => {
     );
 }
 
-export default ListItem;
+export default memo(ListItem);
