@@ -7,8 +7,12 @@ li {
     list-style-type: none;
 }
 
-.form {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+button {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
 }
 
 .form__item {
@@ -34,14 +38,14 @@ li {
     max-width: 100%;
     padding: 15px;
     display: flex;
-    align-items: flex-start;
+    justify-content: space-between;
     border: 1px solid rgba(0, 66, 105, 0.28);
     border-radius: 4px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .multiselect__console {
     display: flex;
+    align-self: flex-start;
     align-items: center;
     gap: 20px;
     align-self: flex-end;
@@ -54,7 +58,7 @@ li {
 }
 
 .multiselect__items {
-    width: 100%;
+    max-width: 100%;
     border: 1px solid rgba(0, 66, 105, 0.28);
     border-radius: 4px;
     position: absolute;
@@ -64,7 +68,7 @@ li {
 }
 
 .multiselect__items_active {
-    width: 100%;
+    max-width: 100%;
     border: 1px solid rgba(0, 66, 105, 0.28);
     border-radius: 4px;
     position: absolute;
@@ -95,4 +99,14 @@ li {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 150px;
+}
+
+.button-close {
+    transition: transform .2s linear;
+    transform: rotate(180deg);
+}
+
+.button-open {
+    transition: transform .2s linear;
+    transform: rotate(0deg);
 }
