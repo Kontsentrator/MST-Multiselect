@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Multiselect from "./Multiselect";
-import {IItem} from 'interfaces/interfaces';
+import { IItem } from 'interfaces/interfaces';
 
 const App: React.FC = () => {
     const [items, setItems] = useState<IItem[]>([]);
