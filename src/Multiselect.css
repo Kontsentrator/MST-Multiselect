@@ -54,7 +54,7 @@ button {
 .gate {
     width: 1px;
     height: 25px;
-    background-color: black;
+    background-color: rgba(0, 66, 105, 0.28);
 }
 
 .multiselect__items {
