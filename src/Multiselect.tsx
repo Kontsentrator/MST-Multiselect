@@ -1,5 +1,5 @@
 import './Multiselect.css';
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {IItem} from 'interfaces/interfaces';
 
 import ListItem from './ListItem';
