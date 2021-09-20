@@ -1,11 +1,12 @@
 import './Multiselect.css';
 import React, {useState, useEffect, useRef} from 'react';
-import {IItem} from './interfaces/interfaces';
+import {IItem} from 'interfaces/interfaces';
 
 import ListItem from './ListItem';
+import SelectedListItem from './SelectedListItem';
 
-import clear_img from './img/Clear.svg';
-import triangle_img from './img/Triangle.svg';
+import triangle_img from 'img/Triangle.svg';
+import clear_img from 'img/Clear.svg';
 
 type ItemsListProps = {
   items: IItem[]
@@ -59,24 +60,30 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
         <div className="multiselect__selected-items">
           <ul className="multiselect__selected-items-list">
             {selectedItems.map((item) =>
-              <li key={item.id} id={item.id.toString()} className="selected-item">
-                <span className="selected-item__text">{item.title}</span>
-                <button className="button-clear" onClick={() => handleDeleteClick(item.id)}><img src={clear_img} alt="Убрать" /></button>
-              </li>
+              <SelectedListItem 
+                key={item.id} 
+                item={item} 
+                handleDeleteClick={() => handleDeleteClick(item.id)} 
+              />
             )}
           </ul>
         
           <div className="multiselect__console">
             <button className="button-clear" onClick={handleСlearClick}><img src={clear_img} alt="Очистить" /></button>
             <div className="gate" />
-            <button className="button-open" onClick={handleOpenCloseListClick}><img src={triangle_img} alt="Открыть" /></button>
+            <button className={listIsOpen ? "button-close" : "button-open"} onClick={handleOpenCloseListClick}><img src={triangle_img} alt="Открыть" /></button>
           </div>
         </div>
 
         <div className={listIsOpen ? "multiselect__items_active" : "multiselect__items"}>
           <ul className="multiselect__items-list">
             {items.map((item) =>
-              <ListItem key={item.id} item={item} checked={selectedItems.includes(item)} onChange={(e) => handleCheckBoxChange(e, item.id)} />
+              <ListItem 
+                key={item.id} 
+                item={item} 
+                checked={selectedItems.includes(item)} 
+                onChange={(e) => handleCheckBoxChange(e, item.id)} 
+              />
             )}
           </ul>
         </div>
