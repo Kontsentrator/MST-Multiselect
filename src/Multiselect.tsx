@@ -31,14 +31,17 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
     };
   });
 
+  // Удаление всего списка выбранных элементов
   function handleСlearClick() {
     setSelectedItems([]);
   }
 
+  // Открытие / закрытие списка
   function handleOpenCloseListClick() {
     setListIsOpen(prev => {return !prev});
   }
 
+  // Обработка изменений чекбокса
   function handleCheckBoxChange(e: React.FormEvent<HTMLInputElement>, id: number) {   
     if(e.currentTarget.checked) {
       var listItem = items.find(item => item.id === id)!;
@@ -48,6 +51,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
     }
   }
 
+  // Удаление элемента в массиве выбранных элементов
   function handleDeleteClick(id: number) {
     setSelectedItems(prev => prev.filter(item => item.id !== id));
   }
