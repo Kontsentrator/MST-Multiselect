@@ -1,5 +1,5 @@
 import React from 'react';
-import {IItem} from './interfaces/interfaces';
+import {IItem} from 'interfaces/interfaces';
 
 type ListItemProps = {
     item: IItem,
@@ -9,8 +9,8 @@ type ListItemProps = {
 
 const ListItem: React.FC<ListItemProps> = ({item, checked, onChange}) => {
     return(
-        <li className="item__data">
-            <label>
+        <li className="item">
+            <label className="item__wrap">
                 <input type="checkbox" checked={checked} onChange={(e) => onChange(e, item.id)}></input>
                 {item.title}
             </label>
