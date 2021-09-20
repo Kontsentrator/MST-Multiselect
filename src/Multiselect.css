@@ -107,11 +107,8 @@ button {
     margin-bottom: 0;
 }
 
-.item {
-    display: flex;
-}
-
 .item__wrap {
+    display: flex;
     cursor: pointer;
 }
 
