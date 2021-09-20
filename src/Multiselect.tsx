@@ -75,7 +75,6 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
 
         <div className={listIsOpen ? "multiselect__items_active" : "multiselect__items"}>
           <ul className="multiselect__items-list">
-            
             {items.map((item) =>
               <ListItem key={item.id} item={item} checked={selectedItems.includes(item)} onChange={(e) => handleCheckBoxChange(e, item.id)} />
             )}
