@@ -9,7 +9,7 @@ type ListItemProps = {
 
 const ListItem: React.FC<ListItemProps> = ({item, checked, onChange}) => {
     return(
-        <li key={item.id} className="item__data">
+        <li className="item__data">
             <label>
                 <input type="checkbox" checked={checked} onChange={(e) => onChange(e, item.id)}></input>
                 {item.title}
