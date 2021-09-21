@@ -11,14 +11,16 @@ type SelectedListItemProps = {
 const SelectedListItem: React.FC<SelectedListItemProps> = ({item, handleDeleteClick}) => {
     return(
         <li className="selected-item">
-            <span className="selected-item__text">
-                {typeof item === "string" ? item : item.title}
-            </span>
-            
-            <button className="button-clear" 
-                onClick={() => handleDeleteClick(typeof item === "string" ? item.indexOf(item) : item.id)}>
-                <img src={delete_img} alt="Убрать" />
-            </button>
+            <div className="selected-item__wrap">
+                <span className="selected-item__text">
+                    {typeof item === "string" ? item : item.title}
+                </span>
+                
+                <button className="button-clear" 
+                    onClick={() => handleDeleteClick(typeof item === "string" ? item.indexOf(item) : item.id)}>
+                    <img src={delete_img} alt="Убрать" />
+                </button>
+            </div>
         </li>
     );
 }
