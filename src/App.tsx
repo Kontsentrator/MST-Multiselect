@@ -16,7 +16,7 @@ const App: React.FC = () => {
     return(
         <>
             <Multiselect items={items} />
-            <Multiselect items={["Элемент 1", "Элемент 2", "Элемент 3", "Элемент 4", "Элемент 5"]} />
+            
         </>
     );
 }
