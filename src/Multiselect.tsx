@@ -1,6 +1,7 @@
 import './Multiselect.css';
 import React, { useState, useEffect, useRef } from 'react';
 import {IItem} from 'interfaces/interfaces';
+import { memo } from 'react';
 
 import ListItem from './ListItem';
 import SelectedListItem from './SelectedListItem';
@@ -32,23 +33,23 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
   });
 
   // Удаление всего списка выбранных элементов
-  function handleСlearClick() {
+  const handleСlearClick = () => {
     setSelectedItems([]);
   }
 
   // Открытие / закрытие списка
-  function handleOpenCloseListClick() {
+  const handleOpenCloseListClick = () => {
     setListIsOpen(prev => {return !prev});
   }
 
   // Обработка изменений чекбокса
-  function handleCheckBoxChange(e: React.FormEvent<HTMLInputElement>, id: number) { 
+  const handleCheckBoxChange = (e: React.FormEvent<HTMLInputElement>, id: number) => { 
     var selectedItem: IItem | string;
     if(e.currentTarget.checked) {
       if(!isArrayOfString(items)) {
         selectedItem = (items as IItem[]).find(item => item.id === id)!;
       } else {
-        selectedItem = (items as string[])[id]!;
+        selectedItem = (items as string[])[id];
       }
       setSelectedItems(prev => [selectedItem, ...prev]);
       
@@ -117,4 +118,4 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
   );
 }
 
-export default Multiselect;
+export default memo(Multiselect);
