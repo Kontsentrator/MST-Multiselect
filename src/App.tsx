@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import Multiselect from "./Multiselect";
+import Multiselect from "components/Multiselect";
 import { IItem } from 'interfaces/interfaces';
 
 const App: React.FC = () => {
@@ -16,7 +16,7 @@ const App: React.FC = () => {
     return(
         <>
             <Multiselect items={items} />
-            
+            <Multiselect items={[]} />
         </>
     );
 }
