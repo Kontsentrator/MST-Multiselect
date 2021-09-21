@@ -9,12 +9,12 @@ import triangle_img from 'img/Triangle.svg';
 import clear_img from 'img/Clear.svg';
 
 type ItemsListProps = {
-  items: IItem[]
+  items: (IItem | string)[]
 }
 
 const Multiselect: React.FC<ItemsListProps> = ({items}) => {
   const [listIsOpen, setListIsOpen] = useState<boolean>(false);
-  const [selectedItems, setSelectedItems] = useState<IItem[]>([]);
+  const [selectedItems, setSelectedItems] = useState<(IItem | string)[]>([]);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   // Закрытие списка при клике мимо него
@@ -42,18 +42,40 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
   }
 
   // Обработка изменений чекбокса
-  function handleCheckBoxChange(e: React.FormEvent<HTMLInputElement>, id: number) {   
+  function handleCheckBoxChange(e: React.FormEvent<HTMLInputElement>, id: number) { 
+    var selectedItem: IItem | string;
     if(e.currentTarget.checked) {
-      var listItem = items.find(item => item.id === id)!;
-      setSelectedItems(prev => [listItem, ...prev]);
+      if(!isArrayOfString(items)) {
+        selectedItem = (items as IItem[]).find(item => item.id === id)!;
+      } else {
+        selectedItem = (items as string[])[id]!;
+      }
+      setSelectedItems(prev => [selectedItem, ...prev]);
+      
     } else {
-      setSelectedItems(prev => prev.filter(item => item.id !== id));
+      if(!isArrayOfString(items)) {
+        selectedItem = (items as IItem[]).find(item => item.id === id)!;
+      } else {
+        selectedItem = (items as string[])[id];
+      }
+      setSelectedItems(prev => prev.filter(item => item !== selectedItem));
     }
+  }
+
+  // Проверка, что массив строчный
+  function isArrayOfString(array: (IItem | string)[]): boolean {
+    return array.every(item => typeof item === "string");
   }
 
   // Удаление элемента в массиве выбранных элементов
   function handleDeleteClick(id: number) {
-    setSelectedItems(prev => prev.filter(item => item.id !== id));
+    var selectedItem: IItem | string;
+    if(!isArrayOfString(items)) {
+      selectedItem = (items as IItem[]).find(item => item.id === id)!;
+    } else {
+      selectedItem = (items as string[])[id];
+    }
+    setSelectedItems(prev => prev.filter(item => item !== selectedItem));
   }
 
   return (
@@ -63,15 +85,14 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
         <div className="multiselect__selected-items">
           <ul className="multiselect__selected-items-list">
-            {selectedItems.map((item) =>
+            {selectedItems.map((item, index) =>
               <SelectedListItem 
-                key={item.id} 
+                key={index} 
                 item={item} 
-                handleDeleteClick={() => handleDeleteClick(item.id)} 
+                handleDeleteClick={() => handleDeleteClick(typeof item === "string" ? items.indexOf(item) : item.id)} 
               />
             )}
           </ul>
-        
           <div className="multiselect__console">
             <button className="button-clear" onClick={handleСlearClick}><img src={clear_img} alt="Очистить" /></button>
             <div className="gate" />
@@ -81,12 +102,12 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
 
         <div className={listIsOpen ? "multiselect__items_active" : "multiselect__items"}>
           <ul className="multiselect__items-list">
-            {items.map((item) =>
+            {items.map((item, index) =>
               <ListItem 
-                key={item.id} 
+                key={index} 
                 item={item} 
-                checked={selectedItems.includes(item)} 
-                onChange={(e) => handleCheckBoxChange(e, item.id)} 
+                checked={selectedItems.includes(item)}
+                onChange={(e) => handleCheckBoxChange(e, typeof item === "string" ? items.indexOf(item) : item.id)} 
               />
             )}
           </ul>
