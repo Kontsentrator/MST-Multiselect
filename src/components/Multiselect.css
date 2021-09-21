@@ -82,8 +82,7 @@ button {
     margin: 0 12px 0 14px;
     background-color: rgba(0, 66, 105, 0.28);
 }
-
-.multiselect__items {
+.multiselect__items, .multiselect__items_active {
     box-sizing: border-box;
     max-width: 100%;
     width: 100%;
@@ -91,28 +90,21 @@ button {
     padding: 8px;
     border: 1px solid rgba(0, 66, 105, 0.28);
     position: absolute;
-    visibility: hidden;
-    z-index: 10;
-    transition: opacity .2s, visibility .2s;
-    opacity: 0;
-    overflow-y: auto;
-    max-height: 400px;
-}
-
-.multiselect__items_active {
-    box-sizing: border-box;
-    max-width: 100%;
-    width: 100%;
-    margin-top: 12px;
-    padding: 8px;
-    border: 1px solid rgba(0, 66, 105, 0.28);
-    position: relative;
-    visibility: visible;
     z-index: 10;
     transition: opacity .2s, visibility .2s;
     opacity: 1;
     overflow-y: auto;
     max-height: 400px;
+    background-color: white;
+}
+.multiselect__items {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.multiselect__items_active {
+    visibility: visible;
+    opacity: 1;
 }
 
 .multiselect__items-list li {
