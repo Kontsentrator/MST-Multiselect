@@ -1,5 +1,5 @@
 import './Multiselect.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {IItem} from 'interfaces/interfaces';
 import { memo } from 'react';
 
@@ -33,43 +33,38 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
   });
 
   // Удаление всего списка выбранных элементов
-  const handleСlearClick = () => {
+  const handleСlearClick = useCallback(() => {
     setSelectedItems([]);
-  }
+  }, []);
 
   // Открытие / закрытие списка
-  const handleOpenCloseListClick = () => {
+  const handleOpenCloseListClick = useCallback(() => {
     setListIsOpen(prev => {return !prev});
-  }
+  }, []);
 
   // Обработка изменений чекбокса
   const handleCheckBoxChange = (e: React.FormEvent<HTMLInputElement>, id: number) => { 
     var selectedItem: IItem | string;
-    if(e.currentTarget.checked) {
-      if(!isArrayOfString(items)) {
-        selectedItem = (items as IItem[]).find(item => item.id === id)!;
-      } else {
-        selectedItem = (items as string[])[id];
-      }
-      setSelectedItems(prev => [selectedItem, ...prev]);
-      
+    if(!isArrayOfString(items)) {
+      selectedItem = (items as IItem[]).find(item => item.id === id)!;
     } else {
-      if(!isArrayOfString(items)) {
-        selectedItem = (items as IItem[]).find(item => item.id === id)!;
-      } else {
-        selectedItem = (items as string[])[id];
-      }
+      selectedItem = (items as string[])[id];
+    }
+
+    if(e.currentTarget.checked) {
+      setSelectedItems(prev => [selectedItem, ...prev]);
+    } else {
       setSelectedItems(prev => prev.filter(item => item !== selectedItem));
     }
-  }
+  };
 
   // Проверка, что массив строчный
-  function isArrayOfString(array: (IItem | string)[]): boolean {
+  const isArrayOfString = useCallback((array: (IItem | string)[]): boolean => {
     return array.every(item => typeof item === "string");
-  }
+  }, []);
 
   // Удаление элемента в массиве выбранных элементов
-  function handleDeleteClick(id: number) {
+  const handleDeleteClick = (id: number) => {
     var selectedItem: IItem | string;
     if(!isArrayOfString(items)) {
       selectedItem = (items as IItem[]).find(item => item.id === id)!;
