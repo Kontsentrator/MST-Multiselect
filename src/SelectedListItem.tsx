@@ -4,15 +4,21 @@ import { IItem } from 'interfaces/interfaces';
 import delete_img from 'img/Clear.svg';
 
 type SelectedListItemProps = {
-    item: IItem,
+    item: IItem | string,
     handleDeleteClick(id: number): void
 }
 
 const SelectedListItem: React.FC<SelectedListItemProps> = ({item, handleDeleteClick}) => {
     return(
         <li className="selected-item">
-            <span className="selected-item__text">{item.title}</span>
-            <button className="button-clear" onClick={() => handleDeleteClick(item.id)}><img src={delete_img} alt="Убрать" /></button>
+            <span className="selected-item__text">
+                {typeof item === "string" ? item : item.title}
+            </span>
+            
+            <button className="button-clear" 
+                onClick={() => handleDeleteClick(typeof item === "string" ? item.indexOf(item) : item.id)}>
+                <img src={delete_img} alt="Убрать" />
+            </button>
         </li>
     );
 }
