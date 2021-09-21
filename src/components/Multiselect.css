@@ -38,7 +38,7 @@ button {
 
 .multiselect__selected-items {
     max-width: 100%;
-    padding: 8px 13px 8px 14px;
+    padding: 8px 13px 8px 13px;
     display: flex;
     justify-content: space-between;
     border: 1px solid rgba(0, 66, 105, 0.28);
@@ -47,10 +47,18 @@ button {
 
 .selected-item {
     display: inline-block;
-    padding: 4px 8px 3px 8px;
+    align-items: center;
+    padding: 5px 8px 5px 12px;
     color: #00395C;
     background: rgba(0, 66, 105, 0.07);
     border-radius: 4px;
+    margin-right: 20px;
+}
+
+.selected-item__wrap {
+    display: flex;
+    gap: 9px;
+    align-items: center;
 }
 
 .selected-item__text {
@@ -58,14 +66,14 @@ button {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 180px;
+    color: rgba(0, 57, 92, 0.8);
 }
 
 .multiselect__console {
     display: flex;
-    align-self: flex-start;
     align-items: center;
-    align-self: flex-end;
+    height: min-content;
 }
 
 .gate {
@@ -120,14 +128,35 @@ button {
     cursor: pointer;
 }
 
+.button-clear {
+    width: 12px;
+    height: 13px;
+}
+
 .button-close {
     transition: transform .2s linear;
     transform: rotate(180deg);
-    max-height: min-content;
 }
 
 .button-open {
     transition: transform .2s linear;
     transform: rotate(0deg);
     max-height: min-content;
+}
+
+.button-open, .button-close {
+    width: 9px;
+    height: 6px;
+}
+
+.button-open img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.button-close img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
