@@ -11,9 +11,10 @@ import clear_img from 'img/Clear.svg';
 
 type ItemsListProps = {
   items: (IItem | string)[]
+  label_text: string
 }
 
-const Multiselect: React.FC<ItemsListProps> = ({items}) => {
+const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
   const [listIsOpen, setListIsOpen] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState<(IItem | string)[]>([]);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,26 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
     };
   });
 
+  // -------------- Методы -------------
+
+  // Нахождение выбранного элемента в массиве всех элементов. Возвр. нужный элемент
+  const findSelectedItem = useCallback((id: number) => {
+    var selectedItem: IItem | string;
+    if(!isArrayOfString(items)) {
+      selectedItem = (items as IItem[]).find(item => item.id === id)!;
+    } else {
+      selectedItem = (items as string[])[id];
+    }
+    return selectedItem;
+  }, []);
+
+  // Проверка, что массив строчный
+  const isArrayOfString = useCallback((array: (IItem | string)[]): boolean => {
+    return array.every(item => typeof item === "string");
+  }, []);
+
+  // -------------- Обработчики -------------
+
   // Удаление всего списка выбранных элементов
   const handleСlearClick = useCallback(() => {
     setSelectedItems([]);
@@ -44,39 +65,23 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
 
   // Обработка изменений чекбокса
   const handleCheckBoxChange = (e: React.FormEvent<HTMLInputElement>, id: number) => { 
-    var selectedItem: IItem | string;
-    if(!isArrayOfString(items)) {
-      selectedItem = (items as IItem[]).find(item => item.id === id)!;
-    } else {
-      selectedItem = (items as string[])[id];
-    }
-
+    var selectedItem: IItem | string = findSelectedItem(id);
     if(e.currentTarget.checked) {
-      setSelectedItems(prev => [selectedItem, ...prev]);
+      setSelectedItems(prev => [...prev, selectedItem]);
     } else {
       setSelectedItems(prev => prev.filter(item => item !== selectedItem));
     }
   };
 
-  // Проверка, что массив строчный
-  const isArrayOfString = useCallback((array: (IItem | string)[]): boolean => {
-    return array.every(item => typeof item === "string");
-  }, []);
-
-  // Удаление элемента в массиве выбранных элементов
+  // Удаление выбранного элемента в массиве выбранных элементов
   const handleDeleteClick = (id: number) => {
-    var selectedItem: IItem | string;
-    if(!isArrayOfString(items)) {
-      selectedItem = (items as IItem[]).find(item => item.id === id)!;
-    } else {
-      selectedItem = (items as string[])[id];
-    }
+    var selectedItem: IItem | string = findSelectedItem(id);
     setSelectedItems(prev => prev.filter(item => item !== selectedItem));
   }
 
   return (
     <div className="form__item">
-      <label htmlFor="multiselect__datasets" className="label">Выберите участников</label>
+      <label htmlFor="multiselect__datasets" className="label">{label_text}</label>
 
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
         <div className="multiselect__selected-items">
