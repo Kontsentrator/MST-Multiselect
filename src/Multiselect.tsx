@@ -64,7 +64,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
   }, []);
 
   // Удаление элемента в массиве выбранных элементов
-  const handleDeleteClick = (id: number) => {
+  const handleDeleteClick = useCallback((id: number) => {
     var selectedItem: IItem | string;
     if(!isArrayOfString(items)) {
       selectedItem = (items as IItem[]).find(item => item.id === id)!;
@@ -72,7 +72,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
       selectedItem = (items as string[])[id];
     }
     setSelectedItems(prev => prev.filter(item => item !== selectedItem));
-  }
+  }, []);
 
   return (
     <div className="form__item">
