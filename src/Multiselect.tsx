@@ -76,7 +76,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items}) => {
 
   return (
     <div className="form__item">
-      <label htmlFor="multiselect__datasets" className="label">Датасеты</label>
+      <label htmlFor="multiselect__datasets" className="label">Выберите участников</label>
 
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
         <div className="multiselect__selected-items">
