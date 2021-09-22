@@ -54,7 +54,6 @@ button {
     transition: background-color .2s;
     border-radius: 4px;
     margin-right: 20px;
-    line-height: 20px;
 }
 
 .selected-item:hover {
@@ -88,12 +87,13 @@ button {
     margin: 0 12px 0 14px;
     background-color: rgba(0, 66, 105, 0.28);
 }
+
 .multiselect__items, .multiselect__items_active {
     box-sizing: border-box;
     max-width: 100%;
     width: 100%;
     margin-top: 12px;
-    padding: 8px;
+    padding: 9px;
     border: 1px solid rgba(0, 66, 105, 0.28);
     position: absolute;
     z-index: 10;
@@ -103,6 +103,7 @@ button {
     max-height: 400px;
     background-color: white;
 }
+
 .multiselect__items {
     visibility: hidden;
     opacity: 0;
@@ -114,7 +115,7 @@ button {
 }
 
 .multiselect__items-list li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .multiselect__items-list li:last-of-type {
@@ -124,6 +125,7 @@ button {
 .item__wrap {
     display: flex;
     cursor: pointer;
+    gap: 8px;
 }
 
 .button-clear {
@@ -132,28 +134,20 @@ button {
 }
 
 .button-close {
-    transition: transform .2s linear;
     transform: rotate(180deg);
 }
 
 .button-open {
-    transition: transform .2s linear;
     transform: rotate(0deg);
-    max-height: min-content;
 }
 
 .button-open, .button-close {
+    transition: transform .2s linear;
     width: 9px;
     height: 6px;
 }
 
-.button-open img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.button-close img {
+.button-open img, .button-close img {
     max-width: 100%;
     height: auto;
     display: block;
