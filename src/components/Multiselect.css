@@ -45,6 +45,13 @@ button {
     border-radius: 4px;
 }
 
+.multiselect__selected-items-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 10px;
+    gap: 20px;
+}
+
 .selected-item {
     display: inline-block;
     align-items: center;
@@ -53,7 +60,6 @@ button {
     background-color: rgba(0, 66, 105, 0.07);
     transition: background-color .2s;
     border-radius: 4px;
-    margin-right: 20px;
 }
 
 .selected-item:hover {
