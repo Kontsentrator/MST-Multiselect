@@ -8,5 +8,5 @@ export interface IItem {
     category_id: number,
     category: unknown,
     groud_id: number,
-    group: unknown,
+    group: unknown
 }
