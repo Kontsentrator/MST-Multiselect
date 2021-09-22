@@ -25,7 +25,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
   useEffect(() => {
     if(items === undefined) {
-      let array: string[] = ["Элемент 1", "Элемент 2", "Элемент 3"];
+      let array: string[] = ["Элемент 1", "Элемент 2", "Элемент 3", "Элемент 4", "Элемент 5"];
       setAllItems(array);
     } else {
       setAllItems(items);
