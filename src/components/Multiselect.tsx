@@ -35,6 +35,11 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
   // -------------- Методы -------------
 
+  // Проверка, что массив строчный
+  const isArrayOfString = useCallback((array: (IItem | string)[]): boolean => {
+    return array.every(item => typeof item === "string");
+  }, []);
+
   // Нахождение выбранного элемента в массиве всех элементов. Возвр. нужный элемент
   const findSelectedItem = useCallback((id: number) => {
     var selectedItem: IItem | string;
@@ -44,12 +49,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
       selectedItem = (items as string[])[id];
     }
     return selectedItem;
-  }, []);
-
-  // Проверка, что массив строчный
-  const isArrayOfString = useCallback((array: (IItem | string)[]): boolean => {
-    return array.every(item => typeof item === "string");
-  }, []);
+  }, [isArrayOfString, items]);
 
   // -------------- Обработчики -------------
 
@@ -64,20 +64,20 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
   }, []);
 
   // Обработка изменений чекбокса
-  const handleCheckBoxChange = (e: React.FormEvent<HTMLInputElement>, id: number) => { 
+  const handleCheckBoxChange = useCallback((e: React.FormEvent<HTMLInputElement>, id: number) => { 
     var selectedItem: IItem | string = findSelectedItem(id);
     if(e.currentTarget.checked) {
       setSelectedItems(prev => [...prev, selectedItem]);
     } else {
       setSelectedItems(prev => prev.filter(item => item !== selectedItem));
     }
-  };
+  }, [findSelectedItem]);
 
   // Удаление выбранного элемента в массиве выбранных элементов
-  const handleDeleteClick = (id: number) => {
+  const handleDeleteClick = useCallback((id: number) => {
     var selectedItem: IItem | string = findSelectedItem(id);
     setSelectedItems(prev => prev.filter(item => item !== selectedItem));
-  }
+  }, [findSelectedItem]);
 
   return (
     <div className="form__item">
