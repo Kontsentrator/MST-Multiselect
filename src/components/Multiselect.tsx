@@ -113,8 +113,9 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
       <label htmlFor="multiselect__datasets" className="label">{labelText}</label>
 
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
-        <div className="multiselect__selected-items">
+        <div className={selectedItems.length === 0 ? "multiselect__selected-items_empty" : "multiselect__selected-items"}>
           <ul className="multiselect__selected-items-list">
+            <li property="height: 100%;"></li>
             {selectedItems.map((item, index) =>
               <SelectedListItem 
                 key={index} 
