@@ -10,14 +10,43 @@ import triangle_img from 'img/Triangle.svg';
 import clear_img from 'img/Clear.svg';
 
 type ItemsListProps = {
-  items: (IItem | string)[]
-  label_text: string
+  items?: (IItem | string)[]
+  label_text?: string
 }
 
 const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
-  const [listIsOpen, setListIsOpen] = useState<boolean>(false);
-  const [selectedItems, setSelectedItems] = useState<(IItem | string)[]>([]);
+  const [listIsOpen, setListIsOpen] = useState<boolean>(false); // Список открыт?
+  const [labelText, setLabelText] = useState<string>(''); // Текст для <label>
+  const [allItems, setAllItems] = useState<(IItem | string)[]>([]); // Все элементы
+  const [selectedItems, setSelectedItems] = useState<(IItem | string)[]>([]); // Выбранные элементы
   const wrapRef = useRef<HTMLDivElement>(null);
+
+  // -------------- Эффекты -------------
+
+  useEffect(() => {
+    if(items === undefined) {
+      let array: string[] = ["Элемент 1", "Элемент 2", "Элемент 3"];
+      setAllItems(array);
+    } else {
+      setAllItems(items);
+    }
+
+    return () => {
+      setAllItems([]);
+    }
+  }, [items]);
+
+  useEffect(() => {
+    if(label_text === undefined) {
+      setLabelText("Выберите элементы");
+    } else {
+      setLabelText(label_text);
+    }
+    
+    return () => {
+      setLabelText('');
+    }
+  }, [label_text]);
 
   // Закрытие списка при клике мимо него
   useEffect(() => {
@@ -42,14 +71,14 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
   // Нахождение выбранного элемента в массиве всех элементов. Возвр. нужный элемент
   const findSelectedItem = useCallback((id: number) => {
-    var selectedItem: IItem | string;
-    if(!isArrayOfString(items)) {
-      selectedItem = (items as IItem[]).find(item => item.id === id)!;
+    let selectedItem: IItem | string;
+    if(!isArrayOfString(allItems)) {
+      selectedItem = (allItems as IItem[]).find(item => item.id === id)!;
     } else {
-      selectedItem = (items as string[])[id];
+      selectedItem = (allItems as string[])[id];
     }
     return selectedItem;
-  }, [isArrayOfString, items]);
+  }, [isArrayOfString, allItems]);
 
   // -------------- Обработчики -------------
 
@@ -65,7 +94,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
   // Обработка изменений чекбокса
   const handleCheckBoxChange = useCallback((e: React.FormEvent<HTMLInputElement>, id: number) => { 
-    var selectedItem: IItem | string = findSelectedItem(id);
+    let selectedItem: IItem | string = findSelectedItem(id);
     if(e.currentTarget.checked) {
       setSelectedItems(prev => [...prev, selectedItem]);
     } else {
@@ -75,13 +104,13 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
   // Удаление выбранного элемента в массиве выбранных элементов
   const handleDeleteClick = useCallback((id: number) => {
-    var selectedItem: IItem | string = findSelectedItem(id);
+    let selectedItem: IItem | string = findSelectedItem(id);
     setSelectedItems(prev => prev.filter(item => item !== selectedItem));
   }, [findSelectedItem]);
 
   return (
     <div className="form__item">
-      <label htmlFor="multiselect__datasets" className="label">{label_text}</label>
+      <label htmlFor="multiselect__datasets" className="label">{labelText}</label>
 
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
         <div className="multiselect__selected-items">
@@ -90,7 +119,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
               <SelectedListItem 
                 key={index} 
                 item={item} 
-                handleDeleteClick={() => handleDeleteClick(typeof item === "string" ? items.indexOf(item) : item.id)} 
+                handleDeleteClick={() => handleDeleteClick(typeof item === "string" ? allItems.indexOf(item) : item.id)} 
               />
             )}
           </ul>
@@ -109,12 +138,12 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
         <div className={listIsOpen ? "multiselect__items_active" : "multiselect__items"}>
           <ul className="multiselect__items-list">
-            {items.map((item, index) =>
+            {allItems.map((item, index) =>
               <ListItem 
                 key={index} 
                 item={item} 
                 checked={selectedItems.includes(item)}
-                onChange={(e) => handleCheckBoxChange(e, typeof item === "string" ? items.indexOf(item) : item.id)} 
+                onChange={(e) => handleCheckBoxChange(e, typeof item === "string" ? allItems.indexOf(item) : item.id)} 
               />
             )}
           </ul>
