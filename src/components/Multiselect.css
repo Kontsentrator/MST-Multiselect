@@ -102,7 +102,7 @@ button {
     max-width: 100%;
     width: 100%;
     margin-top: 12px;
-    padding: 9px;
+    padding: 10px 13px;
     border: 1px solid rgba(0, 66, 105, 0.28);
     position: absolute;
     z-index: 10;
@@ -124,7 +124,7 @@ button {
 }
 
 .multiselect__items-list li {
-    margin-bottom: 10px;
+    margin-bottom: 14.5px;
 }
 
 .multiselect__items-list li:last-of-type {
@@ -134,7 +134,7 @@ button {
 .item__wrap {
     display: flex;
     cursor: pointer;
-    gap: 8px;
+    gap: 9px;
 }
 
 .button-clear {
@@ -161,3 +161,35 @@ button {
     height: auto;
     display: block;
 }
+
+/* Стилизация чекбокса */
+
+.checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.checkbox+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.checkbox+label::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(0, 66, 105, 0.28);
+    border-radius: 4px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 75% 75%;
+}
+
+.checkbox:checked+label::before {
+    border-color: #0078D2;
+    background-color: #0078D2;
+    background-image: url("/src/img/Check.svg");
+  }
