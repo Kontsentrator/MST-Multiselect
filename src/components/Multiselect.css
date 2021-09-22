@@ -17,7 +17,7 @@ button {
 
 .form__item {
     display: flex;
-    flex-direction: column;1
+    flex-direction: column;
     width: min-content;
     margin: 0 auto;
 }
