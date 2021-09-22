@@ -14,7 +14,7 @@ const SelectedListItem: React.FC<SelectedListItemProps> = ({item, handleDeleteCl
             <div className="selected-item__wrap">
                 <span className="selected-item__text">
                     {typeof item === "string" ? item : item.title}
-                </span>
+                </span>er
                 
                 <button className="button-clear" 
                     onClick={() => handleDeleteClick(typeof item === "string" ? item.indexOf(item) : item.id)}>
