@@ -13,9 +13,11 @@ const ListItem: React.FC<ListItemProps> = ({item, checked, onChange}) => {
             <label className="item__wrap">
                 <input 
                     type="checkbox" 
+                    className="checkbox"
                     checked={checked} 
                     onChange={(e) => onChange(e, typeof item === "string" ? item.indexOf(item) : item.id)}>
                 </input>
+                <label></label>
                 
                 {typeof item === "string" ? item : item.title}
             </label>
