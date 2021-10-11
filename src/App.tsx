@@ -15,8 +15,8 @@ const App: React.FC = () => {
 
     return(
         <>
-            <Multiselect label_text="Выберите участников" items={["Ануфриенко Н.", "Астафьев П.", "Участник 3", "Участник 4", "Участник 5"]} />
-            <Multiselect label_text="Выберите устройства" items={items} />
+            <Multiselect labelText="Выберите участников" items={["Ануфриенко Н.", "Астафьев П.", "Участник 3", "Участник 4", "Участник 5"]} />
+            <Multiselect labelText="Выберите устройства" items={items} />
         </>
     );
 }
