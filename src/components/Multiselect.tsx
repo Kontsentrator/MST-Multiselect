@@ -10,43 +10,16 @@ import triangle_img from 'img/Triangle.svg';
 import clear_img from 'img/Clear.svg';
 
 type ItemsListProps = {
-  items?: (IItem | string)[]
-  label_text?: string
+  items: (IItem | string)[]
+  labelText?: string
 }
 
-const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
+const Multiselect: React.FC<ItemsListProps> = ({items, labelText}) => {
   const [listIsOpen, setListIsOpen] = useState<boolean>(false); // Список открыт?
-  const [labelText, setLabelText] = useState<string>(''); // Текст для <label>
-  const [allItems, setAllItems] = useState<(IItem | string)[]>([]); // Все элементы
   const [selectedItems, setSelectedItems] = useState<(IItem | string)[]>([]); // Выбранные элементы
   const wrapRef = useRef<HTMLDivElement>(null);
 
   // -------------- Эффекты -------------
-
-  useEffect(() => {
-    if(items === undefined) {
-      let array: string[] = ["Элемент 1", "Элемент 2", "Элемент 3", "Элемент 4", "Элемент 5"];
-      setAllItems(array);
-    } else {
-      setAllItems(items);
-    }
-
-    return () => {
-      setAllItems([]);
-    }
-  }, [items]);
-
-  useEffect(() => {
-    if(label_text === undefined) {
-      setLabelText("Выберите элементы");
-    } else {
-      setLabelText(label_text);
-    }
-    
-    return () => {
-      setLabelText('');
-    }
-  }, [label_text]);
 
   // Закрытие списка при клике мимо него
   useEffect(() => {
@@ -69,16 +42,16 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
     return array.every(item => typeof item === "string");
   }, []);
 
-  // Нахождение выбранного элемента в массиве всех элементов. Возвр. нужный элемент
+  // Нахождение выбранного элемента в массиве. Возвр. нужный элемент
   const findSelectedItem = useCallback((id: number) => {
     let selectedItem: IItem | string;
-    if(!isArrayOfString(allItems)) {
-      selectedItem = (allItems as IItem[]).find(item => item.id === id)!;
+    if(!isArrayOfString(items)) {
+      selectedItem = (items as IItem[]).find(item => item.id === id)!;
     } else {
-      selectedItem = (allItems as string[])[id];
+      selectedItem = (items as string[])[id];
     }
     return selectedItem;
-  }, [isArrayOfString, allItems]);
+  }, [isArrayOfString, items]);
 
   // -------------- Обработчики -------------
 
@@ -110,7 +83,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
   return (
     <div className="form__item">
-      <label htmlFor="multiselect__datasets" className="label">{labelText}</label>
+      <label htmlFor="multiselect__datasets" className="label">{labelText ? labelText : "Выберите элементы"}</label>
 
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
         <div className={selectedItems.length === 0 ? "multiselect__selected-items_empty" : "multiselect__selected-items"}>
@@ -120,7 +93,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
               <SelectedListItem 
                 key={index} 
                 item={item} 
-                handleDeleteClick={() => handleDeleteClick(typeof item === "string" ? allItems.indexOf(item) : item.id)} 
+                handleDeleteClick={() => handleDeleteClick(typeof item === "string" ? items.indexOf(item) : item.id)} 
               />
             )}
           </ul>
@@ -139,12 +112,12 @@ const Multiselect: React.FC<ItemsListProps> = ({items, label_text}) => {
 
         <div className={listIsOpen ? "multiselect__items_active" : "multiselect__items"}>
           <ul className="multiselect__items-list">
-            {allItems.map((item, index) =>
+            {items.map((item, index) =>
               <ListItem 
                 key={index} 
                 item={item} 
                 checked={selectedItems.includes(item)}
-                onChange={(e) => handleCheckBoxChange(e, typeof item === "string" ? allItems.indexOf(item) : item.id)} 
+                onChange={(e) => handleCheckBoxChange(e, typeof item === "string" ? items.indexOf(item) : item.id)} 
               />
             )}
           </ul>
