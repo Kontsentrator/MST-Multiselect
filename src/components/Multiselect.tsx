@@ -6,16 +6,13 @@ import { memo } from 'react';
 import ListItem from './ListItem';
 import SelectedListItem from './SelectedListItem';
 
-import triangle_img from 'img/Triangle.svg';
-import clear_img from 'img/Clear.svg';
-
 type ItemsListProps = {
   items: (IItem | string)[]
   labelText?: string
 }
 
 const Multiselect: React.FC<ItemsListProps> = ({items, labelText}) => {
-  const [listIsOpen, setListIsOpen] = useState<boolean>(false); // Список открыт?
+  const [listIsOpen, setListIsOpen] = useState(false); // Список открыт?
   const [selectedItems, setSelectedItems] = useState<(IItem | string)[]>([]); // Выбранные элементы
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -98,15 +95,11 @@ const Multiselect: React.FC<ItemsListProps> = ({items, labelText}) => {
             )}
           </ul>
           <div className="multiselect__console">
-            <button className="button-clear" onClick={handleСlearClick}>
-              <img src={clear_img} alt="Очистить" />
-            </button>
+            <button className="button-clear" onClick={handleСlearClick} />
 
             <div className="gate" />
 
-            <button className={listIsOpen ? "button-close" : "button-open"} onClick={handleOpenCloseListClick}>
-              <img src={triangle_img} alt="Открыть" />
-            </button>
+            <button className={listIsOpen ? "button-close" : "button-open"} onClick={handleOpenCloseListClick} />
           </div>
         </div>
 
