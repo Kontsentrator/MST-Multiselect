@@ -140,6 +140,7 @@ button {
 .button-clear {
     width: 12px;
     height: 13px;
+    background-image: url(/src/img/Clear.svg);
 }
 
 .button-close {
@@ -151,6 +152,7 @@ button {
 }
 
 .button-open, .button-close {
+    background-image: url(/src/img/Triangle.svg);
     transition: transform .2s linear;
     width: 9px;
     height: 6px;
