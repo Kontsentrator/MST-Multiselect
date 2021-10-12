@@ -17,7 +17,7 @@ const ListItem: React.FC<ListItemProps> = ({item, checked, onChange}) => {
                     checked={checked} 
                     onChange={(e) => onChange(e, typeof item === "string" ? item.indexOf(item) : item.id)}
                 />
-                <label></label>
+                <label />
                 
                 {typeof item === "string" ? item : item.title}
             </label>
