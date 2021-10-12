@@ -172,13 +172,13 @@ button {
     opacity: 0;
 }
 
-.checkbox+label {
+.checkbox+span {
     display: inline-flex;
     align-items: center;
     user-select: none;
 }
 
-.checkbox+label::before {
+.checkbox+span::before {
     content: '';
     display: inline-block;
     width: 14px;
@@ -190,7 +190,7 @@ button {
     background-size: 75% 75%;
 }
 
-.checkbox:checked+label::before {
+.checkbox:checked+span::before {
     border-color: #0078D2;
     background-color: #0078D2;
     background-image: url("/src/img/Check.svg");
