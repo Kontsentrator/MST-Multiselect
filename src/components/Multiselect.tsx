@@ -98,7 +98,7 @@ const Multiselect: React.FC<ItemsListProps> = ({items, labelText}) => {
             <button className="button-clear" onClick={handleСlearClick} />
 
             <div className="gate" />
-
+            
             <button className={listIsOpen ? "button-close" : "button-open"} onClick={handleOpenCloseListClick} />
           </div>
         </div>
