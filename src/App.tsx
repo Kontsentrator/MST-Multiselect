@@ -4,7 +4,7 @@ import Multiselect from "components/Multiselect";
 import { IItem } from "interfaces/interfaces";
 
 const App: React.FC = () => {
-  const API_ENDPOINT = "https://api-rguide.admire.social/api/product";
+  const API_ENDPOINT = "https://api-rguide.admire.social/api/products";
   const [items, setItems] = useState<IItem[] | string[]>([]);
   const [error, setError] = useState<Error>();
 
@@ -14,10 +14,10 @@ const App: React.FC = () => {
       .catch(error => setError(error));
   }, [setItems]);
 
+
+
   return (
-    <>
-      {console.log(error?.message)}
-      {error ? <span className="error">{error.message}</span> : ''}
+    <>      
       <Multiselect
         labelText="Выберите участников"
         items={[
@@ -29,10 +29,12 @@ const App: React.FC = () => {
         ]}
       />
       
-      <Multiselect 
-        labelText="Выберите устройства" 
-        items={items} 
-      />
+      {error ? <span className="error">{error.message}</span> :
+        <Multiselect 
+          labelText="Выберите устройства" 
+          items={items} 
+        />
+      }
     </>
   );
 };
