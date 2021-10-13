@@ -97,7 +97,7 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
   return (
     <div className="form__item">
       <label htmlFor="multiselect__datasets" className="label">
-        {labelText ? labelText : "Выберите элементы"}
+        {labelText ?? "Выберите элементы"}
       </label>
 
       <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
