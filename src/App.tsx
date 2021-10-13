@@ -4,13 +4,14 @@ import Multiselect from "components/Multiselect";
 import { IItem } from "interfaces/interfaces";
 
 const App: React.FC = () => {
-  const API_ENDPOINT = "https://api-rguide.admire.social/api/products";
+  const API_ENDPOINT = "https://api-rguide.admire.social/api";
+  const RESOURCE = "/products";
   const [items, setItems] = useState<IItem[] | string[]>([]);
   const [error, setError] = useState<Error>();
 
   // Получение списка по ссылке
   useEffect(() => {
-    axios.get<IItem[]>(API_ENDPOINT).then(response => setItems(response.data))
+    axios.get<IItem[]>(API_ENDPOINT + RESOURCE).then(response => setItems(response.data))
       .catch(error => setError(error));
   }, [setItems]);
 
