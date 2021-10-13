@@ -135,6 +135,9 @@ button {
     display: flex;
     cursor: pointer;
     gap: 9px;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
 }
 
 .button-clear {
@@ -194,4 +197,22 @@ button {
     border-color: #0078D2;
     background-color: #0078D2;
     background-image: url("/src/img/Check.svg");
-  }
+}
+
+/*ul > li > label > input + p::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(0, 66, 105, 0.28);
+    border-radius: 4px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 75% 75%;
+}
+
+ul > li > label > input:checked + p::before {
+    border-color: #0078D2;
+    background-color: #0078D2;
+    background-image: url("/src/img/Check.svg");
+}*/
