@@ -6,9 +6,11 @@ body {
 }
 
 .error {
+  display: block;
+  text-align: center;
   font-size: 16px;
   line-height: 140%;
   /* or 22px */
-  color: red;
+  color: #D32F2F;
   margin-bottom: 10px;
 }
