@@ -11,14 +11,14 @@ const App: React.FC = () => {
 
   // Получение списка по ссылке
   useEffect(() => {
-    axios.get<IItem[]>(API_ENDPOINT + RESOURCE).then(response => setItems(response.data))
-      .catch(error => setError(error));
+    axios
+      .get<IItem[]>(API_ENDPOINT + RESOURCE)
+      .then((response) => setItems(response.data))
+      .catch((error) => setError(error));
   }, [setItems]);
 
-
-
   return (
-    <>      
+    <>
       <Multiselect
         labelText="Выберите участников"
         items={[
@@ -29,13 +29,12 @@ const App: React.FC = () => {
           "Участник 5",
         ]}
       />
-      
-      {error ? <span className="error">{error.message}</span> :
-        <Multiselect 
-          labelText="Выберите устройства" 
-          items={items} 
-        />
-      }
+
+      {error ? (
+        <span className="error">{error.message}</span>
+      ) : (
+        <Multiselect labelText="Выберите устройства" items={items} />
+      )}
     </>
   );
 };
