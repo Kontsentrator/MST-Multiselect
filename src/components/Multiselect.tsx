@@ -28,8 +28,8 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
         setListIsOpen(false);
       }
     }
-
     window.addEventListener("mouseup", handleOutOfListClick);
+
     return () => {
       window.removeEventListener("mouseup", handleOutOfListClick);
     };
