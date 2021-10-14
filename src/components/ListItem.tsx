@@ -19,8 +19,9 @@ const ListItem: React.FC<ListItemProps> = ({ item, checked, onChange }) => {
             onChange(e, typeof item === "string" ? item.indexOf(item) : item.id)
           }
         />
+        <span />
 
-        <span>{typeof item === "string" ? item : item.title}</span>
+        {typeof item === "string" ? item : item.title}
       </label>
     </li>
   );
