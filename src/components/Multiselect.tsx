@@ -100,7 +100,8 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
             ))}
           </ul>
           <div className="multiselect__console">
-            <button className="button-clear" onClick={handleСlearClick} />
+            {selectedItems.length <= 0 || <button className="button-clear" onClick={handleСlearClick} />}
+            
 
             <div className="gate" />
 
