@@ -3,9 +3,18 @@ import axios from "axios";
 import Multiselect from "components/Multiselect";
 import { IItem } from "interfaces/interfaces";
 
+const API_ENDPOINT = "https://api-rguide.admire.social/api";
+const RESOURCE = "/products";
+
+const members = [
+  "Ануфриенко Н.",
+  "Астафьев П.",
+  "Участник 3",
+  "Участник 4",
+  "Участник 5",
+];
+
 const App: React.FC = () => {
-  const API_ENDPOINT = "https://api-rguide.admire.social/api";
-  const RESOURCE = "/products";
   const [items, setItems] = useState<IItem[] | string[]>([]);
   const [error, setError] = useState<Error>();
 
@@ -19,16 +28,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Multiselect
-        labelText="Выберите участников"
-        items={[
-          "Ануфриенко Н.",
-          "Астафьев П.",
-          "Участник 3",
-          "Участник 4",
-          "Участник 5",
-        ]}
-      />
+      <Multiselect labelText="Выберите участников" items={members} />
 
       {error ? (
         <span className="error">{error.message}</span>
