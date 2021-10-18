@@ -1,8 +1,7 @@
 import React, { memo } from "react";
-import { IItem } from "interfaces/interfaces";
 
 type ListItemProps = {
-  item: IItem | string;
+  item: string;
   checked: boolean;
   onChange(e: React.FormEvent<HTMLInputElement>, id: number): void;
 };
@@ -16,12 +15,12 @@ const ListItem: React.FC<ListItemProps> = ({ item, checked, onChange }) => {
           className="checkbox"
           checked={checked}
           onChange={(e) =>
-            onChange(e, typeof item === "string" ? item.indexOf(item) : item.id)
+            onChange(e, item.indexOf(item))
           }
         />
         <span />
 
-        {typeof item === "string" ? item : item.title}
+        {item}
       </label>
     </li>
   );
