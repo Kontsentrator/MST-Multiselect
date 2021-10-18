@@ -14,7 +14,7 @@ type ItemsListProps = {
 const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
   const [listIsOpen, setListIsOpen] = useState(false); // Список открыт?
   const [selectedItems, setSelectedItems] = useState<(IItem | string)[]>([]); // Выбранные элементы
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const multiselectRef = useRef<HTMLDivElement>(null);
 
   // -------------- Эффекты -------------
 
@@ -22,8 +22,7 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
   useEffect(() => {
     function handleOutOfListClick(e: Event) {
       if (
-        wrapRef.current &&
-        !wrapRef.current.contains(e.target as HTMLElement)
+        !multiselectRef.current?.contains(e.target as HTMLElement)
       ) {
         setListIsOpen(false);
       }
@@ -100,7 +99,7 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
         {labelText ?? "Выберите элементы"}
       </label>
 
-      <div id="multiselect__datasets" className="multiselect" ref={wrapRef}>
+      <div id="multiselect__datasets" className="multiselect" ref={multiselectRef}>
         <div
           className={
             selectedItems.length === 0
