@@ -15,7 +15,7 @@ const members = [
 ];
 
 const App: React.FC = () => {
-  const [items, setItems] = useState<IItem[] | string[]>([]);
+  const [items, setItems] = useState<IItem[]>([]);
   const [error, setError] = useState<Error>();
 
   // Получение списка по ссылке
@@ -25,6 +25,7 @@ const App: React.FC = () => {
       .then((response) => setItems(response.data))
       .catch((error) => setError(error));
   }, [setItems]);
+  const devices = items.map(item => item.title);
 
   return (
     <>
@@ -33,7 +34,7 @@ const App: React.FC = () => {
       {error ? (
         <span className="error">{error.message}</span>
       ) : (
-        <Multiselect labelText="Выберите устройства" items={items} />
+        <Multiselect labelText="Выберите устройства" items={devices} />
       )}
     </>
   );
