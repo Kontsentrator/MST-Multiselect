@@ -2,11 +2,12 @@ import React, { memo } from "react";
 
 type ListItemProps = {
   item: string;
+  id: number
   checked: boolean;
   onChange(e: React.FormEvent<HTMLInputElement>, id: number): void;
 };
 
-const ListItem: React.FC<ListItemProps> = ({ item, checked, onChange }) => {
+const ListItem: React.FC<ListItemProps> = ({ item, id, checked, onChange }) => {
   return (
     <li className="item">
       <label className="item__wrap">
@@ -15,7 +16,7 @@ const ListItem: React.FC<ListItemProps> = ({ item, checked, onChange }) => {
           className="checkbox"
           checked={checked}
           onChange={(e) =>
-            onChange(e, item.indexOf(item))
+            onChange(e, id)
           }
         />
         <span />

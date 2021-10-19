@@ -121,9 +121,10 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
             {items.map((item, index) => (
               <ListItem
                 key={index}
+                id={index}
                 item={item}
                 checked={selectedItems.includes(item)}
-                onChange={(e) => handleCheckBoxChange(e, items.indexOf(item))}
+                onChange={handleCheckBoxChange}
               />
             ))}
           </ul>
