@@ -141,9 +141,10 @@ button {
 }
 
 .button-clear {
+    background: url(/src/img/Clear.svg) 100% 100% no-repeat;
+    background-position: center center;
     width: 12px;
     height: 13px;
-    background: url(/src/img/Clear.svg) 100% 100% no-repeat;
 }
 
 .button-close {
@@ -156,9 +157,10 @@ button {
 
 .button-open, .button-close {
     background: url(/src/img/Triangle.svg) 100% 100% no-repeat;
+    background-position: center center;
     transition: transform .2s linear;
     width: 12px;
-    height: 13px;
+    height: 16px;
 }
 
 .button-open img, .button-close img {
