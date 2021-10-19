@@ -25,7 +25,7 @@ const App: React.FC = () => {
       .then((response) => setItems(response.data))
       .catch((error) => setError(error));
   }, [setItems]);
-  const devices = items.map(item => item.title);
+  const devices = items.map((item) => item.title);
 
   return (
     <>

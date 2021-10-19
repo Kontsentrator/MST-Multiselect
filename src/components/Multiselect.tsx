@@ -31,14 +31,12 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
     };
   });
 
-  // -------------- Методы -------------
-
   // -------------- Обработчики -------------
 
   // Удаление всего списка выбранных элементов
   const handleСlearClick = () => {
     setSelectedItems([]);
-  }
+  };
 
   // Открытие / закрытие списка
   const handleOpenCloseListClick = useCallback(() => {
@@ -100,8 +98,9 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
             ))}
           </ul>
           <div className="multiselect__console">
-            {selectedItems.length <= 0 || <button className="button-clear" onClick={handleСlearClick} />}
-            
+            {selectedItems.length <= 0 || (
+              <button className="button-clear" onClick={handleСlearClick} />
+            )}
 
             <div className="gate" />
 

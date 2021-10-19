@@ -12,17 +12,11 @@ const SelectedListItem: React.FC<SelectedListItemProps> = ({
   return (
     <li className="selected-item">
       <div className="selected-item__wrap">
-        <span className="selected-item__text">
-          {item}
-        </span>
+        <span className="selected-item__text">{item}</span>
 
         <button
           className="button-clear"
-          onClick={() =>
-            handleDeleteClick(
-              item.indexOf(item)
-            )
-          }
+          onClick={() => handleDeleteClick(item.indexOf(item))}
         />
       </div>
     </li>

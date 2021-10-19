@@ -2,7 +2,7 @@ import React, { memo } from "react";
 
 type ListItemProps = {
   item: string;
-  id: number
+  id: number;
   checked: boolean;
   onChange(e: React.FormEvent<HTMLInputElement>, id: number): void;
 };
@@ -15,9 +15,7 @@ const ListItem: React.FC<ListItemProps> = ({ item, id, checked, onChange }) => {
           type="checkbox"
           className="checkbox"
           checked={checked}
-          onChange={(e) =>
-            onChange(e, id)
-          }
+          onChange={(e) => onChange(e, id)}
         />
         <span />
 
