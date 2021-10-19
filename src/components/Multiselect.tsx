@@ -39,11 +39,9 @@ const Multiselect: React.FC<ItemsListProps> = ({ items, labelText }) => {
   };
 
   // Открытие / закрытие списка
-  const handleOpenCloseListClick = useCallback(() => {
-    setListIsOpen((prev) => {
-      return !prev;
-    });
-  }, []);
+  const handleOpenCloseListClick = () => {
+    setListIsOpen((prev) => !prev);
+  }
 
   // Обработка изменений чекбокса
   const handleCheckBoxChange = useCallback(
